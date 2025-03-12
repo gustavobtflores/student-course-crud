@@ -1,7 +1,9 @@
 import { NavLink, useNavigate } from "react-router";
+import { useAlert } from "../hooks/useAlert";
 
 export function Login() {
   const navigate = useNavigate();
+  const { alert } = useAlert();
 
   async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -10,17 +12,31 @@ export function Login() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      await fetch("http://localhost:3333/students/authenticate", {
+      const res = await fetch("http://localhost:3333/students/authenticate", {
         body: JSON.stringify(data),
         method: "POST",
         headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
+      });
 
-      // navigate("/dashboard");
+      if (!res.ok) {
+        throw res;
+      }
+
+      const body = await res.json();
+      console.log(body);
+      localStorage.setItem("token", body.token);
+
+      alert({ title: "Sucesso", description: "Login realizado com sucesso", type: "success" });
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      navigate("/student");
     } catch (err) {
-      console.error(err);
+      if (err.status === 401) {
+        alert({ title: "Erro", description: "E-mail ou senha inválidos", type: "error" });
+      } else {
+        alert({ title: "Erro", description: "Erro ao realizar login", type: "error" });
+      }
     }
   }
 

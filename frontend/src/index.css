@@ -163,3 +163,75 @@ body {
   display: block;
   margin-top: 12px;
 }
+
+.alert {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  max-width: 350px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.alert__content {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.alert__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alert__text span {
+  font-size: 14px;
+}
+
+.alert--success {
+  background: var(--green-600);
+  border-color: var(--green-700);
+  color: var(--white);
+}
+
+.alert--error {
+  background: var(--red-600);
+  border-color: var(--red-700);
+  color: var(--white);
+}
+
+.alert__dismiss {
+  color: var(--gray-300);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.alert__dismiss:hover {
+  color: var(--white);
+}
+
+.student {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.student__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
