@@ -1,9 +1,22 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
-const StudentSchema = new mongoose.Schema({
+interface Student {
+  name: string;
+  email: string;
+  password: string;
+  address: string;
+  birthdate: Date;
+  courses: Types.ObjectId[];
+  registration: string;
+}
+
+const StudentSchema = new mongoose.Schema<Student>({
+  registration: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  address: { type: String, required: true },
+  birthdate: { type: Date, required: true },
   courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
 });
 

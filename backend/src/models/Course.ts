@@ -1,9 +1,17 @@
 import mongoose from "mongoose";
 
-const CourseSchema = new mongoose.Schema({
+interface Course {
+  id: string;
+  name: string;
+  description: string;
+  workload: number;
+}
+
+const CourseSchema = new mongoose.Schema<Course>({
+  id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
-  code: { type: String, required: true, unique: true },
   description: { type: String },
+  workload: { type: Number },
 });
 
 export default mongoose.model("Course", CourseSchema);
