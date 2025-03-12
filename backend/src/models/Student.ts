@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import mongoose, { Types } from "mongoose";
 
 interface Student {
@@ -11,11 +12,10 @@ interface Student {
 }
 
 const StudentSchema = new mongoose.Schema<Student>({
-  registration: { type: String, required: true },
+  registration: { type: String, required: true, unique: true, default: randomUUID() },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  address: { type: String, required: true },
   birthdate: { type: Date, required: true },
   courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
 });

@@ -5,16 +5,16 @@ import bcrypt from "bcrypt";
 class StudentController {
   async register(req: Request, res: Response) {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, birthdate } = req.body;
 
       const hash = await bcrypt.hash(password, 10);
-      const student = new Student({ name, email, password: hash });
+      const student = new Student({ name, email, password: hash, birthdate });
       await student.save();
 
       res.status(201).send(student);
     } catch (err) {
       console.error(err);
-      res.status(500).send({ error: "Algo inesperado aconteceu" });
+      res.status(500).send({ error: "Um erro inesperado aconteceu" });
     }
   }
 
