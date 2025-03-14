@@ -19,11 +19,11 @@ createRoot(document.getElementById("root")!).render(
         <RouteChangeHandler />
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Layout />}>
             <Route path="students" element={<Students />} />
             <Route path="courses" element={<Courses />} />
-
             <Route path="enrollments" element={<Enrollments />} />
           </Route>
         </Routes>

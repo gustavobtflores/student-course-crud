@@ -8,7 +8,7 @@ export function Signup() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      await fetch("http://localhost:3333/students", {
+      await fetch("http://localhost:3333/users", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
@@ -26,7 +26,6 @@ export function Signup() {
         <h1 className="signup__title card__title">Criar uma conta</h1>
         <span className="signup__description card__description">Insira suas informações para se cadastrar</span>
         <form className="signup__form" onSubmit={handleSignup}>
-          <input id="name" name="name" className="form-input" type="text" required />
           <label className="form-label" htmlFor="">
             E-mail
           </label>

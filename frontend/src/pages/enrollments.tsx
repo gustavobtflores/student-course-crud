@@ -151,6 +151,26 @@ export function Enrollments() {
       {selectedStudentId && (
         <>
           <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group controlId="selectCourse">
+                <Form.Label>Adicionar disciplina</Form.Label>
+                <Form.Control as="select" value={selectedCourseId} onChange={(e) => setSelectedCourseId(e.target.value)}>
+                  <option value="">-- Selecione --</option>
+                  {availableCourses.map((course) => (
+                    <option key={course._id} value={course._id}>
+                      {course.name} ({course.code})
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col md={2} className="d-flex align-items-end">
+              <Button variant="primary" onClick={enrollCourse} disabled={loading || !selectedCourseId}>
+                Matricular
+              </Button>
+            </Col>
+          </Row>
+          <Row className="mt-5">
             <Col>
               <h4>Disciplinas Matriculadas</h4>
               {enrolledCourses.length > 0 ? (
@@ -179,26 +199,6 @@ export function Enrollments() {
               ) : (
                 <p>Este estudante não está matriculado em nenhuma disciplina.</p>
               )}
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col md={6}>
-              <Form.Group controlId="selectCourse">
-                <Form.Label>Adicionar disciplina</Form.Label>
-                <Form.Control as="select" value={selectedCourseId} onChange={(e) => setSelectedCourseId(e.target.value)}>
-                  <option value="">-- Selecione --</option>
-                  {availableCourses.map((course) => (
-                    <option key={course._id} value={course._id}>
-                      {course.name} ({course.code})
-                    </option>
-                  ))}
-                </Form.Control>
-              </Form.Group>
-            </Col>
-            <Col md={2} className="d-flex align-items-end">
-              <Button variant="primary" onClick={enrollCourse} disabled={loading || !selectedCourseId}>
-                Matricular
-              </Button>
             </Col>
           </Row>
         </>

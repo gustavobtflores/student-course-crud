@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, ListGroup, Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import StudentModal from "./student-modal";
 import { type Student } from "../types/student";
 
@@ -61,13 +61,6 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, onStudentDeleted, on
             </Button>
           </div>
         </Card.Body>
-        {student.courses && student.courses.length > 0 && (
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <strong>Cursos:</strong> {student.courses.join(", ")}
-            </ListGroup.Item>
-          </ListGroup>
-        )}
       </Card>
 
       {showEditModal && <StudentModal show={showEditModal} onHide={() => setShowEditModal(false)} onStudentSaved={handleStudentSaved} student={student} />}

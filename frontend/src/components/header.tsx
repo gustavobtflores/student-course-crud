@@ -1,6 +1,8 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Link, LinkProps } from "react-router";
+
+const RouterLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => <Link ref={ref} {...props} />);
 
 const Header: React.FC = () => {
   return (
@@ -18,6 +20,11 @@ const Header: React.FC = () => {
             <Nav.Link as={Link} to="/enrollments">
               Matrículas
             </Nav.Link>
+          </Nav>
+          <Nav>
+            <RouterLink to="/login">
+              <Button variant="outline-light">Logout</Button>
+            </RouterLink>
           </Nav>
         </Navbar.Collapse>
       </Container>

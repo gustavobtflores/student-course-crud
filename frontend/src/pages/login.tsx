@@ -12,7 +12,7 @@ export function Login() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const res = await fetch("http://localhost:3333/students/authenticate", {
+      const res = await fetch("http://localhost:3333/users/authenticate", {
         body: JSON.stringify(data),
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ export function Login() {
 
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      navigate("/student");
+      navigate("/students");
     } catch (err) {
       if ((err as { status: number }).status === 401) {
         alert({ title: "Erro", description: "E-mail ou senha inválidos", type: "error" });
