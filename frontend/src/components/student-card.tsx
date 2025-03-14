@@ -42,7 +42,7 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, onStudentDeleted, on
 
   return (
     <>
-      <Card className="mb-3">
+      <Card className="mb-3" style={{ maxWidth: "calc(33% - 20px / 2)" }}>
         <Card.Body>
           <Card.Title>{student.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">Matrícula: {student.registration}</Card.Subtitle>

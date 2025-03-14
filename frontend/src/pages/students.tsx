@@ -40,7 +40,7 @@ export function Students() {
           </Button>
         </Col>
       </Row>
-      <div className="students__list" style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+      <div className="students__list" style={{ display: "flex", gap: "20px", marginTop: "20px", flexWrap: "wrap" }}>
         {students.length > 0 ? students.map((student) => <StudentCard key={student.registration} student={student} onStudentDeleted={fetchStudents} />) : <span>Nenhum estudante cadastrado.</span>}
       </div>
       <CreateStudentModal
