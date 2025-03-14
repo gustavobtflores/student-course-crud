@@ -32,7 +32,7 @@ export function Login() {
 
       navigate("/student");
     } catch (err) {
-      if (err.status === 401) {
+      if ((err as { status: number }).status === 401) {
         alert({ title: "Erro", description: "E-mail ou senha inválidos", type: "error" });
       } else {
         alert({ title: "Erro", description: "Erro ao realizar login", type: "error" });

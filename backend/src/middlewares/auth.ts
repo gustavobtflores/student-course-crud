@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import Student from "../models/Student";
+import User from "../models/User";
 
 const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -14,16 +14,15 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
 
     const decoded: any = jwt.verify(token, "jwtsupersecret");
 
-    const student = await Student.findById(decoded.id);
-    if (!student) {
+    const user = await User.findById(decoded.id);
+    if (!user) {
       res.status(401).send({ error: "Usuário não encontrado" });
       return;
     }
 
     req.user = {
-      id: student._id.toString(),
-      email: student.email,
-      name: student.name,
+      id: user._id.toString(),
+      email: user.email,
     };
 
     next();

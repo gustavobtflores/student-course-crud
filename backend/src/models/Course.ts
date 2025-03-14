@@ -1,17 +1,18 @@
+import { v4 as uuid } from "uuid";
 import mongoose from "mongoose";
 
-interface Course {
+export interface Course {
   id: string;
   name: string;
   description: string;
-  workload: number;
+  code: string;
 }
 
 const CourseSchema = new mongoose.Schema<Course>({
-  id: { type: String, required: true, unique: true },
+  id: { type: String, required: true, unique: true, default: () => uuid() },
   name: { type: String, required: true },
   description: { type: String },
-  workload: { type: Number },
+  code: { type: String },
 });
 
 export default mongoose.model("Course", CourseSchema);

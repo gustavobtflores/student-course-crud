@@ -1,9 +1,8 @@
-// controllers/courseController.ts
 import { Request, Response } from "express";
 import Course from "../models/Course";
 
-export class CourseController {
-  public static async getAllCourses(req: Request, res: Response): Promise<void> {
+class CourseController {
+  public async getAllCourses(req: Request, res: Response): Promise<void> {
     try {
       const courses = await Course.find();
       res.json(courses);
@@ -12,7 +11,7 @@ export class CourseController {
     }
   }
 
-  public static async getCourseById(req: Request, res: Response): Promise<void> {
+  public async getCourseById(req: Request, res: Response): Promise<void> {
     try {
       const course = await Course.findById(req.params.id);
       if (!course) {
@@ -25,7 +24,7 @@ export class CourseController {
     }
   }
 
-  public static async createCourse(req: Request, res: Response): Promise<void> {
+  public async createCourse(req: Request, res: Response): Promise<void> {
     const { name, code, description } = req.body;
     const course = new Course({ name, code, description });
     try {
@@ -36,7 +35,7 @@ export class CourseController {
     }
   }
 
-  public static async updateCourse(req: Request, res: Response): Promise<void> {
+  public async updateCourse(req: Request, res: Response): Promise<void> {
     try {
       const course = await Course.findById(req.params.id);
       if (!course) {
@@ -54,7 +53,7 @@ export class CourseController {
     }
   }
 
-  public static async deleteCourse(req: Request, res: Response): Promise<void> {
+  public async deleteCourse(req: Request, res: Response): Promise<void> {
     try {
       const course = await Course.findById(req.params.id);
       if (!course) {
@@ -68,3 +67,5 @@ export class CourseController {
     }
   }
 }
+
+export default new CourseController();

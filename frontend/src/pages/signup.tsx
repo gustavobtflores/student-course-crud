@@ -26,9 +26,6 @@ export function Signup() {
         <h1 className="signup__title card__title">Criar uma conta</h1>
         <span className="signup__description card__description">Insira suas informações para se cadastrar</span>
         <form className="signup__form" onSubmit={handleSignup}>
-          <label className="form-label" htmlFor="name">
-            Nome
-          </label>
           <input id="name" name="name" className="form-input" type="text" required />
           <label className="form-label" htmlFor="">
             E-mail
@@ -38,10 +35,6 @@ export function Signup() {
             Senha
           </label>
           <input id="password" name="password" className="form-input" type="password" placeholder="********" required />
-          <label className="form-label" htmlFor="birthdate">
-            Data de nascimento
-          </label>
-          <input id="birthdate" name="birthdate" className="form-input" type="date" />
           <button className="btn" type="submit">
             Cadastrar
           </button>

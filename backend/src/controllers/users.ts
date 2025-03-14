@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
-import Student from "../models/Student";
+import User from "../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-class StudentController {
+class UserController {
   async register(req: Request, res: Response) {
     try {
-      const { name, email, password, birthdate } = req.body;
+      const { email, password } = req.body;
 
       const hash = await bcrypt.hash(password, 10);
-      const student = new Student({ name, email, password: hash, birthdate });
-      await student.save();
+      const user = new User({ email, password: hash });
+      await user.save();
 
-      res.status(201).send(student);
+      res.status(201).send(user);
     } catch (err) {
       console.error(err);
       res.status(500).send({ error: "Um erro inesperado aconteceu" });
@@ -23,19 +23,19 @@ class StudentController {
     try {
       const { email, password } = req.body;
 
-      const student = await Student.findOne({ email });
-      if (!student) {
+      const user = await User.findOne({ email });
+      if (!user) {
         res.status(404).send({ error: "Estudante não cadastrado" });
         return;
       }
 
-      const passwordMatches = await bcrypt.compare(password, student.password);
+      const passwordMatches = await bcrypt.compare(password, user.password);
       if (!passwordMatches) {
         res.status(401).send({ error: "E-mail ou senha incorretos" });
         return;
       }
 
-      const token = jwt.sign({ id: student._id, email: student.email }, "jwtsupersecret", { expiresIn: "1h" });
+      const token = jwt.sign({ id: user._id, email: user.email }, "jwtsupersecret", { expiresIn: "1h" });
 
       res.status(200).json({ token });
     } catch (err) {
@@ -51,13 +51,13 @@ class StudentController {
         return;
       }
 
-      const student = await Student.findById(req.user.id).select("-password");
-      if (!student) {
+      const user = await User.findById(req.user.id).select("-password");
+      if (!user) {
         res.status(404).send({ error: "Estudante não encontrado" });
         return;
       }
 
-      res.status(200).send(student);
+      res.status(200).send(user);
     } catch (err) {
       console.error(err);
       res.status(500).send({ error: "Um erro inesperado aconteceu" });
@@ -65,4 +65,4 @@ class StudentController {
   }
 }
 
-export default new StudentController();
+export default new UserController();

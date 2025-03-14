@@ -94,7 +94,7 @@ body {
   font-size: 14px;
 }
 
-.btn {
+.app-btn {
   width: 100%;
   background: var(--blue-500);
   border: none;
@@ -217,21 +217,4 @@ body {
 
 .alert__dismiss:hover {
   color: var(--white);
-}
-
-.student {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 16px;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
-.student__wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }

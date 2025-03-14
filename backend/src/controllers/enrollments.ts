@@ -3,10 +3,24 @@ import { Types } from "mongoose";
 import Student from "../models/Student";
 
 export class StudentEnrollmentController {
-  public static async enrollCourse(req: Request, res: Response): Promise<void> {
+  public async getStudentEnrollments(req: Request, res: Response): Promise<void> {
     try {
-      const user = req.user;
-      const studentId = user?.id;
+      const student = await Student.findById(req.params.id).populate("courses");
+
+      if (!student) {
+        res.status(404).json({ message: "Estudante não encontrado" });
+        return;
+      }
+
+      res.json(student.courses);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  public async enrollCourse(req: Request, res: Response): Promise<void> {
+    try {
+      const studentId = req.params.id;
       const { courseId } = req.body;
 
       if (!studentId || !courseId) {
@@ -42,11 +56,9 @@ export class StudentEnrollmentController {
     }
   }
 
-  public static async unenrollCourse(req: Request, res: Response): Promise<void> {
+  public async unenrollCourse(req: Request, res: Response): Promise<void> {
     try {
-      const user = req.user;
-      const studentId = user?.id;
-      const { courseId } = req.params;
+      const { id: studentId, courseId } = req.params;
 
       if (!studentId || !courseId) {
         res.status(400).json({ message: "Dados insuficientes para a desmatrícula." });
@@ -83,3 +95,5 @@ export class StudentEnrollmentController {
     }
   }
 }
+
+export default new StudentEnrollmentController();
